@@ -55,9 +55,9 @@ app.get('/todos/', async (request, response) => {
          FROM
             todo
          WHERE
-            todo LIKE '$%{search_q}%'
+            todo LIKE '%${search_q}%'
             AND status = '${status}'
-            AND priority = '${prority}';`
+            AND priority = '${priority}';`
       break
     case hasPriorityProperty(request.query):
       getTodosQuery = `
@@ -145,7 +145,7 @@ app.put('/todos/:todoId', async (request, response) => {
   const {
     todo = previousTodo.todo,
     priority = previousTodo.priority,
-    satus = previousTodo.status,
+    status = previousTodo.status,
   } = request.body
 
   const updateTodoQuery = `
@@ -154,7 +154,7 @@ app.put('/todos/:todoId', async (request, response) => {
       SET
         todo ='${todo}',
         priority = '${priority}',
-        status = '${satus}'
+        status = '${status}'
       WHERE
         id = ${todoId};`
 
