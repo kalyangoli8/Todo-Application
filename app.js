@@ -60,14 +60,14 @@ app.get('/todos/', async (request, response) => {
             AND priority = '${priority}';`
       break
     case hasPriorityProperty(request.query):
-      getTodosQuery = `
-            SELECT
-                *
-            FROM
-                todo
-            WHERE
-                todo LIKE '$%{search_q}%'
-                AND priority = '${priority}';`
+  getTodosQuery = `
+        SELECT
+            *
+        FROM
+            todo
+        WHERE
+            todo LIKE '%${search_q}%'
+            AND priority = '${priority}';`;
       break
     case hasStatusProperty(request.query):
       getTodosQuery = `
